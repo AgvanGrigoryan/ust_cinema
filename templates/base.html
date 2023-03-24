@@ -2,7 +2,7 @@
 {% load static %}
 <html lang="ru">
 <head>
-        <!-- //Meta tag Keywords -->
+    <!-- //Meta tag Keywords -->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,13 +21,27 @@
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900"
           rel="stylesheet">
     <!-- //Fonts -->
-<title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
 </head>
 <body>
-{% include 'include_fragments/header.html' %}
-{% block content %}{% endblock %}
-{% include 'include_fragments/footer.html' %}
+<div id="page" class="page">
 
+    {% include 'include_fragments/header.html' %}
+    {% block breadcrumb %}
+        <ol class="breadcrumb editContent">
+            <li class="breadcrumb-item">
+                <a href="{% url 'movies' %}" class="editContent"
+                   style="outline: none; cursor: inherit;">Home</a>
+            </li>
+            <li class="breadcrumb-item active editContent" style="outline: none; cursor: inherit;">
+                Single
+            </li>
+        </ol>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+    {% include 'include_fragments/footer.html' %}
+</div>
 </body>
 </html>
