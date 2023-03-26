@@ -258,7 +258,7 @@ li > a:only-child:after {
     /* Stylinf the toggle lable */
     .toggle {
         display: block;
-        padding: 8px 20px;
+        padding: 5px 10px;
         font-size: 0.8em;
         text-decoration: none;
         border: none;
@@ -1578,4 +1578,15 @@ a.move-top span {
 /*--//responsive--*/
 .review_container{
     width: 100%;
+}
+
+.review_author_image{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 80px;
+    height: 80px;
+    border: 1px solid lightgreen;
+    border-radius: 50%;
+    margin-right: 2em;
 }
