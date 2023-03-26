@@ -1595,16 +1595,20 @@ a.move-top span {
 }
 
 .reviewsList{
-    padding: 10px;
+    padding: 15px;
     display: flex;
     flex-direction: column-reverse;
-    background-color: #f2f2f2;
+    background-color: #f8f8f8;
     border-radius: 5px;
+    margin-left: -25px;
+    margin-right: -25px;
 }
 .review_container{
     width: 100%;
-        margin-bottom: 10px;
-
+    margin-bottom: 10px;
+}
+.review_container:last-of-type{
+    margin-bottom: 0;
 }
 
 .review_author_image{
@@ -1613,13 +1617,39 @@ a.move-top span {
     background-position: center center;
     width: 60px;
     height: 60px;
-    border: 2px solid #a4a6a9;
+    border: 2px solid #424242;
     border-radius: 50%;
     margin-right: 1em;
-    box-shadow: #f0f1f3 -1px -1px 2px 5px ;
+    box-shadow: #3d3f44 0px 1px 4px 1px;
 }
-
+.answer_review_author_image{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 45px;
+    height: 45px;
+    border: 2px solid #424242;
+    border-radius: 50%;
+    margin-right: 1em;
+    box-shadow:  #3d3f44 0px 1px 4px 1px;
+}
+img.answer_review_author_image{
+    width: 45px;
+    height: 45px;
+}
 .reviewText{
     margin: 0;
     padding: 0;
+}
+
+.answerToReviewBtn {
+    display: inline-block;
+    box-sizing: content-box;
+    margin-bottom: 10px;
+}
+.answerReviewBody{
+    margin-bottom: 5px;
+}
+.answerReviewBody:last-child{
+    margin-bottom: 0;
 }

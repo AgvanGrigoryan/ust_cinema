@@ -19,7 +19,7 @@ class MovieDetailView(DetailView):
 class AddReview(View):
 
     def post(self, request, pk=None):
-        print(request.POST)
+        current_page = request.META.get('HTTP_REFERER')
         form = ReviewForm(request.POST)
         movie = Movie.objects.get(pk=pk)
         if form.is_valid():
@@ -30,4 +30,4 @@ class AddReview(View):
             form.movie = movie
             form.author_id = request.user.id
             form.save()
-        return redirect(movie.get_absolute_url())
+        return redirect(current_page)
