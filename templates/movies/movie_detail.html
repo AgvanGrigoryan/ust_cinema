@@ -117,7 +117,7 @@
             </p>
         </div>
         <hr>
-        <div class="row">
+        <div class="row commentBlockContainer">
             <div class="single-form-left">
                 {% if user.is_authenticated %}
                     <!-- contact form grid -->
@@ -150,40 +150,49 @@
                 {% endif %}
             </div>
 
-            {% for review in movie.reviews_set.all %}
-                <div class="media py-5 review_container">
-                    {% if user.is_authenticated and review.author.image %}
-                        <div class="review_author_image"
-                             style="background-image: url('{{ review.author.image.url }}');"></div>
-                    {% else %}
-                        <img src="{% static 'images/person_image_template.svg' %}" class="mr-3 img-fluid" alt="image">
-                    {% endif %}
-                    <div class="media-body mt-0">
-                        <h5 class="mt-0 editContent">{{ review.author.first_name }}</h5>
-                        <p class="mt-2 editContent">
-                            {{ review.text }}
-                        </p>
-                        <a href="#reviewFormContainer" id="answerToReviewBtn"
-                           onclick="answerToReview('{{ review.author.first_name }}','{{ review.id }}')">Ответить</a>
-                        {#                        <div class="media mt-5 editContent" #}
-                        {#                            <a class="pr-3" href="#">#}
-                        {#                                <img src="{% static 'images/te1.jpg' %}" class="img-fluid" alt="image"#}
-                        {#                                     style="outline: none; cursor: inherit;">#}
-                        {#                            </a>#}
-                        {#                            <div class="media-body">#}
-                        {#                                <h5 class="mt-0 editContent" style="outline: none; cursor: inherit;">Leia Organa</h5>#}
-                        {#                                <p class="mt-2 editContent" style="outline: none; cursor: inherit;">#}
-                        {#                                    Cras sit amet#}
-                        {#                                    nibh libero, in gravida nulla. Nulla vel metus#}
-                        {#                                    scelerisque ante sollicitudin. Cras purus odio,#}
-                        {#                                    vestibulum in vulputate at, tempus viverra turpis. Fusce#}
-                        {#                                    condimentum nunc ac nisi vulputate fringilla..#}
-                        {#                                </p>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
-                    </div>
-                </div>
-            {% endfor %}
+            <span class="reviewsCounter">Отзывы: {{ movie.reviews_set.count }}</span>
+            <div class="reviewsList">
+
+                {% for review in movie.reviews_set.all %}
+{#                    {% if not review.parent %}#}
+                        <div class="media review_container">
+                            {% if user.is_authenticated and review.author.image %}
+                                <div class="review_author_image"
+                                     style="background-image: url('{{ review.author.image.url }}');"></div>
+                            {% else %}
+                                <img src="{% static 'images/person_image_template.svg' %}" class="mr-3 review_author_image"
+                                     alt="image">
+                            {% endif %}
+                            <div class="media-body">
+                                <h5 class="reviewAuthorName">{{ review.author.first_name }}</h5>
+                                <p class="reviewText">
+                                    {{ review.text }}
+                                </p>
+                                <a href="#reviewFormContainer" id="answerToReviewBtn"
+                                   onclick="answerToReview('{{ review.author.first_name }}','{{ review.id }}')">Ответить</a>
+                                {#                        <div class="media mt-5 editContent" #}
+                                {#                            <a class="pr-3" href="#">#}
+                                {#                                <img src="{% static 'images/te1.jpg' %}" class="img-fluid" alt="image"#}
+                                {#                                     style="outline: none; cursor: inherit;">#}
+                                {#                            </a>#}
+                                {#                            <div class="media-body">#}
+                                {#                                <h5 class="mt-0 editContent" style="outline: none; cursor: inherit;">Leia Organa</h5>#}
+                                {#                                <p class="mt-2 editContent" style="outline: none; cursor: inherit;">#}
+                                {#                                    Cras sit amet#}
+                                {#                                    nibh libero, in gravida nulla. Nulla vel metus#}
+                                {#                                    scelerisque ante sollicitudin. Cras purus odio,#}
+                                {#                                    vestibulum in vulputate at, tempus viverra turpis. Fusce#}
+                                {#                                    condimentum nunc ac nisi vulputate fringilla..#}
+                                {#                                </p>#}
+                                {#                            </div>#}
+                                {#                        </div>#}
+                            </div>
+                        </div>
+
+{#                    {% endif %}#}
+                {% endfor %}
+            </div>
+
         </div>
     </div>
     <script>
