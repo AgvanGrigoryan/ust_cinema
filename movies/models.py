@@ -2,6 +2,7 @@ from datetime import date
 
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -19,7 +20,7 @@ class Category(models.Model):
 
 class Actor(models.Model):
     name = models.CharField('Имя', max_length=100)
-    birthday = models.DateField('Дата Рождения', default=date.today())
+    birthday = models.DateField('Дата Рождения', default=timezone.now)
     description = models.TextField('Описание')
     image = models.ImageField('Изображение', upload_to='actors/')
 
