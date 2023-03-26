@@ -1576,6 +1576,12 @@ a.move-top span {
 @media(max-width:320px) {}
 
 /*--//responsive--*/
+.review_add_container{
+    min-width: 300px;
+}
+.add_review_form input{
+    width: 250px;
+}
 .review_container{
     width: 100%;
 }
