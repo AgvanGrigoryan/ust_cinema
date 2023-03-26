@@ -1,3 +1,4 @@
+{% load static %}
 <div class="main-banner bg bg1" id="home">
     <!-- header -->
     <header class="header">
@@ -10,7 +11,7 @@
                     </h1>
                 </div>
 
-                <label for="drop" class="toggle">BBB</label>
+                <label for="drop" class="toggle"><img src="{% static 'images/menu_white_toggle.svg' %}" alt="-\n-"></label>
                 <input type="checkbox" id="drop">
                 <ul class="menu mt-2">
                     <li class="active"><a href="index.html">Главная</a></li>
