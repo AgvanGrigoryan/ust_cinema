@@ -122,14 +122,13 @@ class Rating(models.Model):
 
 
 class Reviews(models.Model):
-    email = models.EmailField()
     author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE)
     text = models.TextField('Сообщение', max_length=5000)
     parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True)
     movie = models.ForeignKey(Movie, verbose_name='Фильм', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.author_name} - {self.movie}'
+        return f'{self.author.first_name} - {self.movie}'
 
     class Meta:
         verbose_name = 'Отзыв'
