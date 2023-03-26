@@ -1576,3 +1576,6 @@ a.move-top span {
 @media(max-width:320px) {}
 
 /*--//responsive--*/
+.review_container{
+    width: 100%;
+}
