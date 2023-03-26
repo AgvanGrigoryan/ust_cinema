@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
+from users.models import User
+
 
 class Category(models.Model):
     name = models.CharField('Категория', max_length=150)
@@ -121,7 +123,7 @@ class Rating(models.Model):
 
 class Reviews(models.Model):
     email = models.EmailField()
-    author_name = models.CharField('Имя Автора', max_length=100)
+    author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE)
     text = models.TextField('Сообщение', max_length=5000)
     parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True)
     movie = models.ForeignKey(Movie, verbose_name='Фильм', on_delete=models.CASCADE)
