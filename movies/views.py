@@ -1,8 +1,8 @@
-from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
+from movies.forms import ReviewForm
 from movies.models import Movie, Reviews
 
 
@@ -19,8 +19,10 @@ class MovieDetailView(DetailView):
 class AddReview(View):
 
     def post(self, request, pk):
-        data = dict(request.POST)
-        print(data)
-        Reviews.objects.create(author_name=data['author_name'], email=data['email'], text=data['text'], movie=Movie.objects.get(pk=pk))
-        print(request.POST)
-        return redirect("movies")
+        form = ReviewForm(request.POST)
+        movie = Movie.objects.get(pk=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.movie = movie
+            form.save()
+        return redirect(movie.get_absolute_url())
