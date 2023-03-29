@@ -144,7 +144,8 @@
                     </div>
                     <!--  //contact form grid ends here -->
                 {% else %}
-                    <div class="contact-single" style="border: 1px solid dimgray; padding: 10px; border-radius: 5px;">
+                    <div class="contact-single" style="border: 1px solid dimgray; padding: 10px; border-radius: 5px;"
+                         id="reviewFormContainer">
                         <h3 class="editContent">Чтобы оставить отзыв <a href="login.html">войдите</a> в аккаунт</h3>
                     </div>
                 {% endif %}
@@ -200,23 +201,21 @@
                                     </div>
                                 </div>
                             {% endfor %}
-
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
-    <script>
-        let parentName, msg_id;
 
+
+    <script>
         function answerToReview(parentAuthorName, message_id) {
-            msg_id = message_id;
-            parentName = parentAuthorName;
             document.getElementById('reviewParent').value = message_id;
             document.getElementById('reviewText_input').value = `${parentAuthorName}, `;
 
         }
-
     </script>
+    <script src="{% static 'scripts/popup.js' %}"></script>
+
 {% endblock %}
