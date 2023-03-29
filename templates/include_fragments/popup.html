@@ -1,0 +1,18 @@
+{% load static %}
+<div class="pop-up popup" id="not_logged_popup">
+        <div class="pop-up__body popup__body">{# content #}
+            <div class="pop-up__close-btn close-popup"><a href="#"><img src="{% static 'images/cancel_white_36dp.svg' %}"
+                                                            alt="Cancel"></a></div>
+            <div class="pop-up__content">
+                <img src="{% static 'images/pop-up_poster.jpg' %}" alt="Poster" class="pop-up__image">
+                <div class="pop-up__text">
+                    <h2 class="pop-up__title">Выполните вход</h2>
+                    <h5 class="pop-up__sub-title">Нет аккаунта?<br> Зарегистрируйтесь!</h5>
+                    <div class="pop-up__buttons">
+                        <a href="login.html" class="login_btn">Вход</a>
+                        <a href="registration.html" class="registration_btn">Регистрация</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
