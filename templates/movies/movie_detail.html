@@ -155,7 +155,7 @@
             <div class="reviewsList">
                 {% for review in movie.get_reviews_without_parent %}
                     <div class="media review_container">
-                        {% if user.is_authenticated and review.author.image %}
+                        {% if review.author.is_active and review.author.image %}
                             <a href="userinfo.html" class="review_author_link">
                                 <div class="review_author_image"
                                      style="background-image: url('{{ review.author.image.url }}');"></div>
