@@ -180,7 +180,7 @@
 
                             {% for answer in review.reviews_set.all %}
                                 <div class="media answerReviewBody">
-                                    {% if user.is_authenticated and answer.author.image %}
+                                    {% if answer.author.is_active and answer.author.image %}
                                         <a href="userinfo.html" class="review_author_link">
                                             <div class="answer_review_author_image"
                                                  style="background-image: url('{{ answer.author.image.url }}');"></div>
