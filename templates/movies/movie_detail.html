@@ -171,9 +171,13 @@
                             <p class="reviewText">
                                 {{ review.text }}
                             </p>
+                            {% if user.is_authenticated %}
+                                <a href="#reviewFormContainer" class="answerToReviewBtn"
+                                   onclick="answerToReview('{{ review.author.first_name }}','{{ review.id }}')">Ответить</a>
+                            {% else %}
+                                <a href="##not_logged_popup" class="answerToReviewBtn popup_link">Ответить</a>
+                            {% endif %}
 
-                            <a href="#reviewFormContainer" class="answerToReviewBtn"
-                               onclick="answerToReview('{{ review.author.first_name }}','{{ review.id }}')">Ответить</a>
                             {% for answer in review.reviews_set.all %}
                                 <div class="media answerReviewBody">
                                     {% if user.is_authenticated and answer.author.image %}
