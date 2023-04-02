@@ -18,16 +18,68 @@ class ReviewAdminInline(admin.StackedInline):
 class MovieAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'category', 'url', 'draft')
     list_display_links = ('id', 'title')
-    readonly_fields = ('id',)
+    readonly_fields = ('id', 'poster_miniature')
 
     search_fields = ('title', 'category__name')
     search_help_text = 'Поиск по названию фильма, с учетом регистра.'
 
+    actions = ('publish', 'unpublish')
     list_filter = ('category', 'year')
 
-    inlines = (ReviewAdminInline,)
+    inlines = (MovieShotsAdminInline, ReviewAdminInline)
     list_editable = ('draft',)
 
+    fieldsets = (
+        (None, {
+            'fields': (('title', 'tagline'), 'description')
+        }),
+        ('Постер', {
+            'fields': (('poster', 'poster_miniature'),)
+        }),
+        ('Жанр и Категория', {
+            'fields': (('genres', 'category'),)
+        }),
+        ('Страна, год и год премьеры', {
+            'fields': (('year', 'country', 'world_premiere'),)
+        }),
+        ('Актеры и Режиссеры', {
+            'classes': ('collapse',),
+            'fields': (('directors', 'actors'),)
+        }),
+        ('Бюджет и сборы', {
+            'fields': (('budget', 'fees_in_usa', 'fees_in_world'),)
+        }),
+        ('Другое', {
+            'fields': ('url', 'draft')
+        })
+    )
+
+    def poster_miniature(self, obj):
+        return mark_safe(f'<img src="{obj.poster.url}" width="100px" max-height="600">')
+
+    poster_miniature.short_description = "Миниатюра постера"
+
+    def publish(self, request, queryset):
+        row_update = queryset.update(draft=False)
+        if row_update == 1:
+            message_bit = '1 запись была обновлена'
+        else:
+            message_bit = f'{row_update} записей были обновлены'
+        self.message_user(request=request, message=message_bit, level=2)
+
+    publish.short_description = 'Опубликовать'
+    publish.allowed_permissions = ('change', )
+
+    def unpublish(self, request, queryset):
+        row_update = queryset.update(draft=True)
+        if row_update == 1:
+            message_bit = '1 запись была обновлена'
+        else:
+            message_bit = f'{row_update} записей были обновлены'
+        self.message_user(request=request, message=message_bit, level=2)
+
+    unpublish.short_description = 'Снять с публикации'
+    unpublish.allowed_permissions = ('change',)
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
