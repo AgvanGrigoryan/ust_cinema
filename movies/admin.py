@@ -1,4 +1,6 @@
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django.contrib import admin
+from django import forms
 from django.utils.safestring import mark_safe
 
 from movies.models import Movie, Category, Reviews, Genre, RatingStar, Actor, Rating, MovieShots
@@ -26,7 +28,6 @@ class MovieShotsAdminInline(admin.TabularInline):
 
 
 class ReviewAdminInline(admin.StackedInline):
-
     model = Reviews
     fields = ('author', 'text')
     readonly_fields = ('author', 'text')
@@ -42,6 +43,8 @@ class MovieAdmin(admin.ModelAdmin):
 
     search_fields = ('title', 'category__name')
     search_help_text = 'Поиск по названию фильма, с учетом регистра.'
+    save_on_top = True
+    form = MovieAdminForm
 
     actions = ('publish', 'unpublish')
     list_filter = ('category', 'year')
@@ -120,7 +123,7 @@ class GenreAdmin(admin.ModelAdmin):
 
 
 @admin.register(MovieShots)
-class MovieAdmin(admin.ModelAdmin):
+class MovieShotsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'movie', 'image_miniature')
     list_display_links = ('id', 'title')
     readonly_fields = ('id', 'image_miniature')
@@ -147,7 +150,9 @@ class ActorAdmin(admin.ModelAdmin):
 
     def image_miniature(self, obj):
         return mark_safe(f'<img src="{obj.image.url}" width="50px" height="auto">')
+
     image_miniature.short_description = "Предпросмотр изображения"
+
 
 @admin.register(Reviews)
 class ReviewsAdmin(admin.ModelAdmin):
