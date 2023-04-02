@@ -2,7 +2,27 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from movies.models import Movie, Category, Reviews, Genre, RatingStar, Actor, Rating, MovieShots
-from users.models import User
+
+
+class MovieAdminForm(forms.ModelForm):
+    description = forms.CharField(label='Описание', widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+
+class MovieShotsAdminInline(admin.TabularInline):
+    model = MovieShots
+    fields = ('title', 'image_miniature', 'image')
+    readonly_fields = ('title', 'image_miniature')
+
+    extra = 0
+
+    def image_miniature(self, obj):
+        return mark_safe(f'<img src="{obj.image.url}" width="100px" max-height="600">')
+
+    image_miniature.short_description = "Предпросмотр изображения"
 
 
 class ReviewAdminInline(admin.StackedInline):
