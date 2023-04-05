@@ -3,7 +3,8 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
 from movies.forms import ReviewForm
-from movies.models import Movie
+from movies.logic import add_review
+from movies.models import Movie, Actor
 
 
 class MoviesListView(ListView):
@@ -17,17 +18,14 @@ class MovieDetailView(DetailView):
 
 
 class AddReview(View):
-
     def post(self, request, pk=None):
         current_page = request.META.get('HTTP_REFERER')
         form = ReviewForm(request.POST)
-        movie = Movie.objects.get(pk=pk)
-        if form.is_valid():
-            form = form.save(commit=False)
-            reviewParent = request.POST.get('reviewRapent', None)
-            if reviewParent:
-                form.parent_id = int(reviewParent)
-            form.movie = movie
-            form.author_id = request.user.id
-            form.save()
+        add_review(request, form, pk)
         return redirect(current_page)
+
+
+class ActorView(DetailView):
+    model = Actor
+    template_name = 'movies/actor.html'
+    slug_field = 'id'

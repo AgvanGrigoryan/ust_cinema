@@ -144,6 +144,9 @@ nav ul li {
     display: inline-block;
     float: left;
 }
+li{
+    list-style: none;
+}
 
 /* Styling the links */
 

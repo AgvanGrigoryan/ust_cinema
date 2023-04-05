@@ -21,12 +21,16 @@
                     <li style="list-style: none">
                                     <span><b>Режиссер:</b>
                                         {% for director in movie.directors.all %}
-                                            {{ director.name }},
+                                            <a href="{% url 'actor_detail' director.id %}">
+                                                {{ director.name }}
+                                            </a>,
                                         {% endfor %}
                                     </span></li>
                     <li style="list-style: none"><span><b>Актеры:</b>
                         {% for actor in movie.actors.all %}
-                            {{ actor.name }},
+                            <a href="{% url 'actor_detail' actor.id %}">
+                                {{ actor.name }}
+                            </a>,
                         {% endfor %}
 
                                 </span></li>
@@ -106,7 +110,7 @@
             <p class="editContent" style="outline: none; cursor: inherit;">
                 {{ movie.description|safe }}
             </p>
-{#      Video Size     560*315 #}
+            {#      Video Size     560*315 #}
         </div>
         <hr>
         <div class="row commentBlockContainer">
