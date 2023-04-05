@@ -35,7 +35,6 @@ function popupOpen(currentPopup) {
         if (popupActive) {
             popupClose(popupActive, false);
         } else {
-            console.log("jjj")
             bodyLock();
         }
 
@@ -97,7 +96,7 @@ function bodyUnlock() {
 }
 
 document.addEventListener('keydown', function (e) {
-    if (e.key === 'Esc'){
+    if (e.key === 'Escape'){
         const popupActive = document.querySelector('.popup.open');
         popupClose(popupActive);
     }
