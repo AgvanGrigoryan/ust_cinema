@@ -11,3 +11,12 @@ def add_review(request, form, pk):
         form.movie_id = movie.id
         form.author_id = request.user.id
         form.save()
+
+
+def movies_filter(request):
+    queryset = Movie.objects.all()
+    if "year" in request.GET:
+        queryset = queryset.filter(year__in=request.GET.getlist('year'))
+    if "genre" in request.GET:
+        queryset = queryset.filter(genres__in=request.GET.getlist("genre"))
+    return queryset.distinct().values("title", "url", "poster")
