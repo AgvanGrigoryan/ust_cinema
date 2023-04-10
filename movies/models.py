@@ -104,12 +104,12 @@ class RatingStar(models.Model):
     value = models.SmallIntegerField('Значение ', default=0)
 
     def __str__(self):
-        return self.value
+        return str(self.value)
 
     class Meta:
         verbose_name = 'звезда рейтинга'
         verbose_name_plural = 'звёзды рейтинга'
-
+        ordering = ['-value']
 
 class Rating(models.Model):
     ip = models.CharField('IP адрес', max_length=15) #TnODO: models.IpAdressField
