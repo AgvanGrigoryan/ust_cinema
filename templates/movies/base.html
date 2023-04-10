@@ -2,13 +2,16 @@
 {% load static %}
 {% block content %}
     {% include 'include_fragments/popup.html' %}
-
     <section class="ab-info-main py-md-5 py-4 editContent"
              style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(33, 37, 41); font-size: 14px; background-color: rgba(0, 0, 0, 0); font-family: Lato, sans-serif;">
         <div class="container py-md-3">
             <div class="row">
+                {% block paginator %}{% endblock %}
+
                 {% include 'include_fragments/sidebar.html' %}
+
                 {% block movie-content %}{% endblock %}
+                {% include 'include_fragments/paginator.html' %}
             </div>
         </div>
     </section>

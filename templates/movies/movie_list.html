@@ -1,5 +1,8 @@
 {% extends 'movies/base.html' %}
 {% block title %}Movies{% endblock %}
+{% block paginator %}
+    {% include 'include_fragments/paginator.html' %}
+{% endblock %}
 
 {% block movie-content %}
 
