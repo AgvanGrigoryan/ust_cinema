@@ -1,5 +1,4 @@
-from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models.query import EmptyQuerySet
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
@@ -61,15 +60,14 @@ class FilterMoviesView(ListView, GenreYear):
         return context
 
 
-
 class JsonFilterMoviesView(ListView):
     def get_queryset(self):
         return movies_filter(self.request)
 
     def get(self, request, *args, **kwargs):
-
         queryset = list(self.get_queryset())
         return JsonResponse({"movies": queryset}, safe=False)
+
 
 class AddStarRating(View):
     def get_client_ip(self, request):
@@ -80,7 +78,6 @@ class AddStarRating(View):
             ip = request.META.get('REMOTE_ADDR')
         return ip
 
-    @login_required
     def post(self, request):
         form = RatingForm(request.POST)
         if form.is_valid():
@@ -92,3 +89,16 @@ class AddStarRating(View):
             return HttpResponse(status=201)
         else:
             return HttpResponse(status=400)
+
+
+class SearchView(ListView):
+    paginate_by = 3
+    def get_queryset(self):
+        query = " ".join(self.request.GET.get('search-query').split()).lower()
+        return Movie.objects.filter(title__icontains=query)
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['search_q'] = f"search-query={self.request.GET.get('search-query')}&"
+        return context
