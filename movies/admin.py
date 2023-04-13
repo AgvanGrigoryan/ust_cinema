@@ -158,7 +158,8 @@ class ActorAdmin(admin.ModelAdmin):
 class ReviewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'author', 'text', 'parent', 'movie')
     list_display_links = ('id', 'text')
-    readonly_fields = ('id', 'author')
+    list_filter = ('movie__title',)
+    readonly_fields = ('id',)
     search_fields = ('author__name',)
     search_help_text = 'Поиск по имени автора, с учетом регистра.'
 
