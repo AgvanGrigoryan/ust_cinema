@@ -1,5 +1,5 @@
 .env
-.idea
+.idea/ust_cinema.iml
 venv/Lib
 venv/Scripts
 
