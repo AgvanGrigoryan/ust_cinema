@@ -59,7 +59,7 @@ class Movie(models.Model):
     tagline = models.CharField('Слоган', max_length=100, default='')
     description = models.TextField('Описание')
     poster = models.ImageField('Постер', upload_to='movies/')
-    year = models.PositiveSmallIntegerField('Дата выхода', default='2023')  #TnODO:DateTime
+    year = models.PositiveSmallIntegerField('Дата выхода', default='2023')
     country = models.CharField('Страна', max_length=50)
     directors = models.ManyToManyField(Actor, verbose_name='режиссёр', related_name='film_director')
     actors = models.ManyToManyField(Actor, verbose_name='актёр', related_name='film_actor')

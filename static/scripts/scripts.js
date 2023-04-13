@@ -10,7 +10,7 @@ function ajaxSend(url, params) {
         .catch(error => console.error(error));
 }
 
-const forms = document.querySelector('form[name=filter]');
+/*const forms = document.querySelector('form[name=filter]');
 
 forms.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -24,7 +24,7 @@ function render(data) {
     let output = template.render(data);
     const div = document.querySelector('.left-ads-display>.row');
     div.innerHTML = output;
-}
+}*/
 
 let html = '\
 {{#movies}}\

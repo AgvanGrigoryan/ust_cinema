@@ -19,4 +19,4 @@ def movies_filter(request):
         queryset = queryset.filter(year__in=request.GET.getlist('year'))
     if "genre" in request.GET:
         queryset = queryset.filter(genres__in=request.GET.getlist("genre"))
-    return queryset.distinct().values("title", "url", "poster")
+    return queryset.distinct()

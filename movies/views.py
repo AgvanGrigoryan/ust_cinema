@@ -49,9 +49,17 @@ class ActorView(GenreYear, DetailView):
 
 
 class FilterMoviesView(ListView, GenreYear):
+    paginate_by = 2
 
     def get_queryset(self):
-        return movies_filter(self)
+        return movies_filter(self.request)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['year'] = ''.join(f'year={x}&' for x in self.request.GET.getlist('year'))
+        context['genre'] = ''.join(f'genre={x}&' for x in self.request.GET.getlist('genre'))
+        return context
+
 
 
 class JsonFilterMoviesView(ListView):
@@ -65,12 +73,10 @@ class JsonFilterMoviesView(ListView):
 
 class AddStarRating(View):
     def get_client_ip(self, request):
-        print(request.META)
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[0]
         else:
-            print(request.META.get('REMOTE_ADDR'))
             ip = request.META.get('REMOTE_ADDR')
         return ip
 

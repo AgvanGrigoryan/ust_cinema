@@ -1,8 +1,9 @@
 {% extends 'movies/base.html' %}
 {% block title %}Movies{% endblock %}
-{% block paginator %}
+{% block top_paginator %}
     {% include 'include_fragments/paginator.html' %}
 {% endblock %}
+
 
 {% block movie-content %}
 
@@ -44,11 +45,9 @@
                 </div>
             {% endfor %}
         </div>
-        <!--<div class="grid-img-right mt-4 text-right bg bg1" >
-            <span class="money editContent" >Flat 50% Off</span>
-            <a href="moviesingle.html" class="btn" >Now</a>
-        </div>-->
     </div>
-
 {% endblock %}
 
+{% block bottom_paginator %}
+    {% include 'include_fragments/paginator.html' %}
+{% endblock %}
