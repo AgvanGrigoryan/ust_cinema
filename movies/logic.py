@@ -1,6 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from movies.models import Movie
 
-
+@login_required
 def add_review(request, form, pk):
     if form.is_valid():
         movie = Movie.objects.get(pk=pk)
