@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.db import models
+from django.db.models import Avg
 from django.urls import reverse
 from django.utils import timezone
 
@@ -80,6 +81,10 @@ class Movie(models.Model):
 
     def get_reviews_without_parent(self):
         return self.reviews_set.filter(parent__isnull=True)
+
+    def rating_average(self):
+        average = self.rating_set.all().aggregate(Avg('star'))['star__avg']
+        return average if average else 0
 
     class Meta:
         verbose_name = 'Фильм'

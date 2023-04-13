@@ -21,5 +21,8 @@ class RatingForm(forms.ModelForm):
     class Meta:
         model = Rating
         fields = ("star",)
+        widgets = {
+            "star": forms.RadioSelect(attrs={})
+        }
 
 
