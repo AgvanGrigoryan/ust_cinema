@@ -131,7 +131,7 @@ class Reviews(models.Model):
     movie = models.ForeignKey(Movie, verbose_name='Фильм', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.author.first_name} - {self.movie}'
+        return f'{self.author.first_name} - {self.movie} - {self.text[:15]}'
 
     class Meta:
         verbose_name = 'Отзыв'
