@@ -42,7 +42,6 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'ckeditor_uploader',
-    'snowpenguin.django.recaptcha3',
     'movies',
     'users',
 ]
