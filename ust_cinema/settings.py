@@ -88,10 +88,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'freedb_ust_cinemadb',
-        'USER': 'freedb_Agvan',
-        'PASSWORD': '35cZ2wmrP*KF$pd',
-        'HOST': 'sql.freedb.tech',
-        'PORT': '3306',
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASS"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),
     }
 }
 
