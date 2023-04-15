@@ -48,7 +48,7 @@ class ActorView(GenreYear, DetailView):
     slug_field = 'id'
 
 
-class FilterMoviesView(ListView, GenreYear):
+class FilterMoviesView(GenreYear, ListView):
     paginate_by = 2
 
     def get_queryset(self):
@@ -92,7 +92,7 @@ class AddStarRating(View):
             return HttpResponse(status=400)
 
 
-class SearchView(ListView):
+class SearchView(GenreYear, ListView):
     paginate_by = 3
     def get_queryset(self):
         query = " ".join(self.request.GET.get('search-query').split()).lower()
