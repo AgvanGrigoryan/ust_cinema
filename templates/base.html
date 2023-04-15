@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-{% load recaptcha3 %}
 <html lang="ru">
 <head>
     <!-- //Meta tag Keywords -->
@@ -24,12 +23,10 @@
     <!-- //Fonts -->
     <title>{% block title %}{% endblock %}</title>
 
-    {% recaptcha_init %}
-    {% recaptcha_ready action_name='homepage' %}
 </head>
 <body>
 <div id="page" class="page">
-
+    {% include 'captcha/includes/js_v3.html' %}
     {% include 'include_fragments/header.html' %}
     {% block breadcrumb %}
         <ol class="breadcrumb editContent">
