@@ -1,6 +1,5 @@
-from django.db.models.query import EmptyQuerySet
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
